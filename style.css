@@ -1,0 +1,123 @@
+html {
+  padding: 1em;
+
+  background-image: url(wall.jpg);
+  background-size: cover;
+
+  color: #aaa;
+  font-size: 130%;
+  font-family: Verdana, Sans-Serif;
+}
+
+#grid, html, body {
+  width: 100%;
+  height: 100%;
+}
+
+#geocheck {
+  width: 100%;
+  height: 100%;
+
+  filter: hue-rotate(240deg) brightness(60%);
+  box-shadow: 10px 10px 100px 30px rgba(0, 255, 0, 80%);
+  border: 2px solid #008800;
+}
+
+#geocheck-container {
+  width: 66.5%;
+  height: 700px;
+  padding-right: 2em;
+}
+
+#howtoplay {
+  vertical-align: top;
+}
+
+#layout {
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 15%);
+  box-shadow: 10px 10px 100px 30px rgba(255, 255, 255, 30%);
+  border: 1px solid #888;
+}
+#layout td {
+  border: 1px solid #888;
+  width: 1em;
+  height: 1em;
+}
+#layout input[type="text"] {
+  width: 100%;
+  font-size: 1em;
+}
+#layout th {
+  font-weight: normal;
+  border-width: 0;
+}
+#layout #top-head th {
+  height: 2.5em;
+  transform: rotate(270deg);
+}
+#layout #top-head th:nth-child(1) {
+  transform: rotate(0deg);
+  color: #fff;
+}
+.north {
+  color: #eaa;
+}
+.east {
+  color: #aae;
+}
+#layout tr td {
+  height: 2em;
+  width: 2em;
+
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+}
+
+#ships {
+  margin-bottom: 2em;
+}
+#ships td:nth-child(2) {
+  padding: 0 1em 0 1em;
+}
+
+#doll-head {
+  position: absolute;
+  left: 40%;
+
+  bottom: 0;
+  z-index: -1;
+}
+
+#doll-head-container {
+  text-align: right;
+}
+
+/* courtesy of https://leaverou.github.io/bubbly/ */
+#status {
+  position: relative;
+  display: block;
+  padding: 1em;
+
+  border-radius: .4em;
+
+  background: #aaa;
+  color: black;
+  font-size: 140%;
+}
+
+#status:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-right-color: #aaa;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -10px;
+  margin-left: -20px;
+}
