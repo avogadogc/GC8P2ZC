@@ -1,10 +1,20 @@
-const NOTE_WATER = '≈';
-const NOTE_SHIP = '🛳';
-const NOTE_UNKNOWN = '⋅';
-
-const TITLE_WATER = 'Voda';
-const TITLE_SHIP = 'Loď';
-const TITLE_UNKNOWN = 'Zatím nic';
+const STATES = {
+  unknown: {
+    title: 'Zatím nic',
+    html: '⋅',
+    symbol: '?',
+  },
+  water: {
+    title: 'Voda',
+    html: '≈',
+    symbol: 'W',
+  },
+  ship: {
+    title: 'Loď',
+    html: '🛳',
+    symbol: 'S',
+  }
+};
 
 const STATUS_WIP = 'Já si pluju se svou lodí...';
 const STATUS_TOO_MANY = 'Takovejch lodí, není to moc?';
@@ -13,11 +23,14 @@ const STATUS_CORRECT_ENCRYPTED = '{"iv":"iBX/ROwjTgoLk4XBHE2QfA==","v":1,"iter":
 const CORRECT_HASH = '8c5d7a2b6b297d6acfaca947130dd6ce81f952e5bd6605ed0cbeeeed1785298d';
 
 function init() {
+  var progress = get_saved_progress()
+
   for (var tr of document.getElementById("layout").getElementsByTagName("tr")) {
     for (var td of tr.getElementsByTagName("td")) {
-      td.innerHTML = NOTE_UNKNOWN;
-      td.title = TITLE_UNKNOWN;
-      set_status(STATUS_WIP);
+      var box_state = state_from_symbol(progress.substring(0, 1));
+      set_box_state(td, box_state);
+      progress = progress.substring(1);
+
       td.onclick = function(event) {
         var element = event.target;
         toggle_box(element);
@@ -25,47 +38,78 @@ function init() {
       }
     }
   }
+
+  validate(); // Restored progress
+}
+
+function get_saved_progress() {
+  var progress = Cookies.get('progress', { domain: 'avogadogc.github.io', path: 'GC8P2ZC' });
+  var isSet = typeof progress === 'string' || progress instanceof String;
+  if (!isSet || progress.length != 50) {
+    progress = STATES.unknown.symbol.repeat(50);
+  } else {
+    console.log('Reading saved progress ' + progress)
+  }
+  return progress;
+}
+
+function state_from_symbol(symbol) {
+  for (state in STATES) {
+    if (STATES[state].symbol == symbol) return STATES[state];
+  }
+
+  console.log("No state for symbol " + symbol);
 }
 
 function toggle_box(element) {
   var old = element.innerHTML
   switch (old) {
-    case NOTE_UNKNOWN:
-        element.innerHTML = NOTE_SHIP;
-        element.title = TITLE_SHIP;
+    case STATES.unknown.html:
+        set_box_state(element, STATES.ship)
     break;
-    case NOTE_SHIP:
-        element.innerHTML = NOTE_WATER;
-        element.title = TITLE_WATER;
+    case STATES.ship.html:
+        set_box_state(element, STATES.water)
     break;
-    case NOTE_WATER:
-        element.innerHTML = NOTE_UNKNOWN;
-        element.title = TITLE_UNKNOWN;
+    case STATES.water.html:
+        set_box_state(element, STATES.unknown)
     break;
     default:
-        alert("Unknown content found: " + old);
-        element.innerHTML = NOTE_UNKNOWN;
-        element.title = TITLE_UNKNOWN;
+        console.log("Unknown content found: " + old);
+        set_box_state(element, STATES.unknown)
     break;
   }
 }
 
+function set_box_state(box, state) {
+  box.innerHTML = state.html;
+  box.title = state.title;
+}
+
 function validate() {
   var shipCnt = 0;
-  var key = '';
+  var progress = '';
   for (var tr of document.getElementById("layout").getElementsByTagName("tr")) {
     for (var td of tr.getElementsByTagName("td")) {
-      if (td.innerHTML == NOTE_SHIP) {
-        shipCnt++;
-        key += 'S';
-      } else {
-        key += '?';
+      switch (td.innerHTML) {
+        case STATES.ship.html:
+          shipCnt++;
+          progress += STATES.ship.symbol;
+        break;
+        case STATES.water.html:
+          progress += STATES.water.symbol;
+        break;
+        case STATES.unknown.html:
+          progress += STATES.unknown.symbol;
+        break;
       }
     }
   }
 
-  if (sha256(key) == CORRECT_HASH) {
-    set_status(decrypt(STATUS_CORRECT_ENCRYPTED, key));
+  Cookies.set('progress', progress, { expires: 7, domain: 'avogadogc.github.io', path: 'GC8P2ZC' });
+
+  var ship_progress = get_ship_progress(progress)
+  if (sha256(ship_progress) == CORRECT_HASH) {
+    set_status(decrypt(STATUS_CORRECT_ENCRYPTED, ship_progress));
     return;
   }
 
@@ -75,6 +119,11 @@ function validate() {
   }
 
   set_status(STATUS_WIP);
+}
+
+function get_ship_progress(progress) {
+  // W as STATES.water.symbol
+  return progress.replace(/W/g, STATES.unknown.symbol);
 }
 
 function set_status(msg) {
