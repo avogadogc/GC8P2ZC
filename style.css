@@ -14,9 +14,17 @@ html {
   height: 100%;
 }
 
-#geocheck-container {
-  width: 66.5%;
+#grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+}
+
+#grid > div {
   height: 700px;
+}
+
+#geocheck-container {
   padding-right: 2em;
   position: relative;
 }
@@ -100,15 +108,10 @@ h2 {
 }
 
 #doll-head {
-  position: absolute;
-  left: 40%;
-
-  bottom: 0;
+  height: 10em;
+  position: relative;
+  top: -60px;
   z-index: -1;
-}
-
-#doll-head-container {
-  text-align: right;
 }
 
 /* courtesy of https://leaverou.github.io/bubbly/ */
@@ -116,12 +119,14 @@ h2 {
   position: relative;
   display: block;
   padding: 1em;
+  max-width: 400px;
+  margin-left: 200px;
 
   border-radius: .4em;
 
   background: #aaa;
   color: black;
-  font-size: 140%;
+  font-size: 120%;
 }
 
 #status:after {
@@ -137,4 +142,9 @@ h2 {
   border-bottom: 0;
   margin-top: -10px;
   margin-left: -20px;
+}
+
+#status-box {
+  min-height: 8em;
+  background: url("doll-head.png") -60px -60px no-repeat ;
 }

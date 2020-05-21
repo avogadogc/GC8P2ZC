@@ -12,68 +12,65 @@
   <script type="text/javascript" src="script.js" async defer></script>
 </head>
 <body onload="init();">
-  <table>
-    <tr>
-      <td id="geocheck-container">
-        <iframe id="geocheck" name="geocheck" src="https://geocheck.org/geo_inputchkcoord.php?gid=6386846df8003fe-c343-46d4-a1bb-824165df1593"></iframe>
-        <a id="reload-button" href="https://geocheck.org/geo_inputchkcoord.php?gid=6386846df8003fe-c343-46d4-a1bb-824165df1593" target="geocheck"><img src="reload.png" alt="Načíst checker" title="Načíst checker"></a>
-      </td>
+  <div id="grid">
+    <div id="geocheck-container">
+      <iframe id="geocheck" name="geocheck" src="https://geocheck.org/geo_inputchkcoord.php?gid=6386846df8003fe-c343-46d4-a1bb-824165df1593"></iframe>
+      <a id="reload-button" href="https://geocheck.org/geo_inputchkcoord.php?gid=6386846df8003fe-c343-46d4-a1bb-824165df1593" target="geocheck"><img src="reload.png" alt="Načíst checker" title="Načíst checker"></a>
+    </div>
 
-      <td id="howtoplay">
-        <h2>Lodičky</h2>
-        <table id="ships">
-          <tr><td>Lekadlová Loď</td><td>1×</td><td>◖■■■◗</td></tr>
-          <tr><td>Pitevní Loď</td><td>1×</td><td>◖■■◗</td></tr>
-          <tr><td>Křičník</td><td>1×</td><td>◖■◗</td></tr>
-          <tr><td>Torpédobodec</td><td>2×</td><td>◖◗</td></tr>
-          <tr><td>Ponůrka</td><td>2×</td><td>●</td></tr>
-        </table>
-        <big>N 49° 13<span class="north">.???</span> E 16° 37<span class="east">.???</big>
-        <table id="layout">
-          <tr id="top-head" class="east">
-            <th title="Loď">🛳</th>
-            <th>.000</th>
-            <th>.100</th>
-            <th>.200</th>
-            <th>.300</th>
-            <th>.400</th>
-            <th>.500</th>
-            <th>.600</th>
-            <th>.700</th>
-            <th>.800</th>
-            <th>.900</th>
-          </tr>
-          <tr>
-            <th class="north">.000</th>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-          <tr>
-            <th class="north">.100</th>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-          <tr>
-            <th class="north">.200</th>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-          <tr>
-            <th class="north">.300</th>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-          <tr>
-            <th class="north">.400</th>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td id="doll-head-container">
-        <img id="doll-head" src="./doll-head.png">
-      </td>
-      <td>
-        <span id="status"></span>
-      </td>
-    </tr>
-  </table>
+    <div id="howtoplay">
+      <h2>Lodičky</h2>
+      <table id="ships">
+        <tr><td>Lekadlová Loď</td><td>1×</td><td>◖■■■◗</td></tr>
+        <tr><td>Pitevní Loď</td><td>1×</td><td>◖■■◗</td></tr>
+        <tr><td>Křičník</td><td>1×</td><td>◖■◗</td></tr>
+        <tr><td>Torpédobodec</td><td>2×</td><td>◖◗</td></tr>
+        <tr><td>Ponůrka</td><td>2×</td><td>●</td></tr>
+      </table>
+      <big>N 49° 13<span class="north">.???</span> E 16° 37<span class="east">.???</big>
+      <table id="layout">
+        <tr id="top-head" class="east">
+          <th title="Loď">🛳</th>
+          <th>.000</th>
+          <th>.100</th>
+          <th>.200</th>
+          <th>.300</th>
+          <th>.400</th>
+          <th>.500</th>
+          <th>.600</th>
+          <th>.700</th>
+          <th>.800</th>
+          <th>.900</th>
+        </tr>
+        <tr>
+          <th class="north">.000</th>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <th class="north">.100</th>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <th class="north">.200</th>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <th class="north">.300</th>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <th class="north">.400</th>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+      </table>
+      <div id="status-box"><span id="status"/></div>
+      <!-- <table>
+        <tr>
+          <td><img id="doll-head" src="./doll-head.png"></td>
+
+        </tr>
+      </table> -->
+    </div>
+  </div>
 </body>
 </html>

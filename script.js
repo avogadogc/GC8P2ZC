@@ -1,7 +1,7 @@
 const STATES = {
   unknown: {
     title: 'Zatím nic',
-    html: '⋅',
+    html: '?',
     symbol: '?',
   },
   water: {
