@@ -16,6 +16,7 @@
     <div id="geocheck-container">
       <iframe id="geocheck" name="geocheck" src="https://geocheck.org/geo_inputchkcoord.php?gid=6386846df8003fe-c343-46d4-a1bb-824165df1593"></iframe>
       <a id="reload-button" href="https://geocheck.org/geo_inputchkcoord.php?gid=6386846df8003fe-c343-46d4-a1bb-824165df1593" target="geocheck"><img src="reload.png" alt="Načíst checker" title="Načíst checker"></a>
+      <a id="newtab-button" href="https://geocheck.org/geo_inputchkcoord.php?gid=6386846df8003fe-c343-46d4-a1bb-824165df1593" target="_blanc"><img src="newtab.png" alt="Otevřít v novém okně" title="Otevřít v novém okně"></a>
     </div>
 
     <div id="howtoplay">
@@ -27,7 +28,7 @@
         <tr><td>Torpédobodec</td><td>2×</td><td>◖◗</td></tr>
         <tr><td>Ponůrka</td><td>2×</td><td>●</td></tr>
       </table>
-      <big>N 49° 13<span class="north">.???</span> E 16° 37<span class="east">.???</big>
+      <big>N 49° 13<span class="north">.???</span> E 16° 37<span class="east">.???</span></big>
       <table id="layout">
         <tr id="top-head" class="east">
           <th title="Loď">🛳</th>
@@ -63,13 +64,10 @@
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
         </tr>
       </table>
-      <div id="status-box"><span id="status"/></div>
-      <!-- <table>
-        <tr>
-          <td><img id="doll-head" src="./doll-head.png"></td>
-
-        </tr>
-      </table> -->
+      <div>
+        <span id="doll-container"><img id="doll-head" src="./doll-head.png"></span>
+        <span id="status-box"><span id="status"/></span>
+      </div>
     </div>
   </div>
 </body>
