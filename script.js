@@ -18,8 +18,12 @@ const STATES = {
 
 const STATUS_WIP = 'Já si pluju se svou lodí...';
 const STATUS_TOO_MANY = 'Takovejch lodí, není to moc?';
-const STATUS_CORRECT_ENCRYPTED = '{"iv":"iBX/ROwjTgoLk4XBHE2QfA==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"+K6y7O7mtCM=","ct":"Av8t8jUy5fLc0MGZfhDtTvRdjPj+JS+j4DrjjSZUyotOE6tWaaMP1GnNuBBtOTF3Y4o2IZ7fSy00IJPTonWtgs/aKS3SK0yWOhJgHRAZIZMtnjlLIV10vOa9SmncSJlQExuyNfIgOm7dDT2Jp/OzA875uzOjQOmuEA/3+SHTg5L7gWClHSHOIEUWkGD5SsqOg7w3gE4btN/RRwKumww4jOW88XsT0j9ZJ0CukmJ3IX2K5d2PKKQzKa17YpXqW6eH4SLM/gjsAvE="}';
 
+const COOKIE_NAME = 'GC8P2ZC-progress'
+const COOKIE_DOMAIN = window.location.href.includes('localhost') ? 'localhost' : 'avogadogc.github.io';
+const COOKIE_PATH = window.location.href.includes('localhost') ? '/' : 'GC8P2ZC';
+
+const STATUS_CORRECT_ENCRYPTED = '{"iv":"iBX/ROwjTgoLk4XBHE2QfA==","v":1,"iter":10000,"ks":128,"ts":64,"mode":"ccm","adata":"","cipher":"aes","salt":"+K6y7O7mtCM=","ct":"Av8t8jUy5fLc0MGZfhDtTvRdjPj+JS+j4DrjjSZUyotOE6tWaaMP1GnNuBBtOTF3Y4o2IZ7fSy00IJPTonWtgs/aKS3SK0yWOhJgHRAZIZMtnjlLIV10vOa9SmncSJlQExuyNfIgOm7dDT2Jp/OzA875uzOjQOmuEA/3+SHTg5L7gWClHSHOIEUWkGD5SsqOg7w3gE4btN/RRwKumww4jOW88XsT0j9ZJ0CukmJ3IX2K5d2PKKQzKa17YpXqW6eH4SLM/gjsAvE="}';
 const CORRECT_HASH = '8c5d7a2b6b297d6acfaca947130dd6ce81f952e5bd6605ed0cbeeeed1785298d';
 
 function init() {
@@ -43,7 +47,7 @@ function init() {
 }
 
 function get_saved_progress() {
-  var progress = Cookies.get('progress', { domain: 'avogadogc.github.io', path: 'GC8P2ZC' });
+  var progress = Cookies.get(COOKIE_NAME, { domain: COOKIE_DOMAIN, path: COOKIE_PATH });
   var isSet = typeof progress === 'string' || progress instanceof String;
   if (!isSet || progress.length != 50) {
     progress = STATES.unknown.symbol.repeat(50);
@@ -105,7 +109,7 @@ function validate() {
     }
   }
 
-  Cookies.set('progress', progress, { expires: 7, domain: 'avogadogc.github.io', path: 'GC8P2ZC' });
+  Cookies.set(COOKIE_NAME, progress, { expires: 7, domain: COOKIE_DOMAIN, path: COOKIE_PATH, sameSite: 'strict' });
 
   var ship_progress = get_ship_progress(progress)
   if (sha256(ship_progress) == CORRECT_HASH) {
